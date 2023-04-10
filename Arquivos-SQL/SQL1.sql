@@ -4,7 +4,7 @@ CREATE TABLE TB_ALUNOS
  Nome_Aluno VARCHAR(50), 
  Data_Matricula TIMESTAMP,
  Nome_Responsavel VARCHAR(50),
- Data_Nasc TIMESTAMP,
+ Data_Nasc DATE,
  Endereco_Aluno VARCHAR(100),
  Telefone VARCHAR(9),
  Cpf_Responsavel VARCHAR(14),
@@ -53,7 +53,7 @@ CREATE TABLE TB_CONTADORES
  Nome VARCHAR(30),
  Cpf VARCHAR(14),
  Endereco VARCHAR(100),
- Data_Nasc TIMESTAMP,
+ Data_Nasc DATE,
  ID_Departamento INT NOT null,
  ID_Salario INT NOT null,  
  PRIMARY KEY (ID_Contador),
@@ -61,15 +61,15 @@ CREATE TABLE TB_CONTADORES
  FOREIGN KEY (ID_Salario) REFERENCES TB_SALARIOS(ID_Salario)); 
 
  -- Cria a tabela dos Gerentes.
-Create table TB_GERENTES
- (ID_Gerente INT NOT null,
+Create table TB_ADMINISTRADORES
+ (ID_Administrador INT NOT null,
  Nome VARCHAR(30),
  Cpf VARCHAR(14),
  Endereco VARCHAR(100),
- Data_Nasc TIMESTAMP,
+ Data_Nasc DATE,
  ID_Departamento INT NOT null,
  ID_Salario INT NOT null, 
- PRIMARY KEY (ID_Gerente),
+ PRIMARY KEY (ID_Administrador),
  FOREIGN KEY (ID_Departamento) REFERENCES TB_DEPARTAMENTOS(ID_Departamento),
  FOREIGN KEY (ID_Salario) REFERENCES TB_SALARIOS(ID_Salario)); 
 -- Cria a tabela dos Salários.  
@@ -160,7 +160,7 @@ INSERT INTO TB_CONTADORES (ID_contador, nome, cpf, endereco, data_nasc, ID_Depar
 (1, 'Carlos Magno', '966.787.231-81', 'Rua Veigas, 19', '1978-03-01', 2, 4),
 (2, 'Jenifer Souza Mello','186.227.454-87', 'Rua Ricardo Soares, 123', '1989-04-12', 2, 4);
 
-INSERT INTO TB_GERENTES (ID_Gerente, nome, cpf, endereco, data_nasc, ID_Departamento, ID_Salario) VALUES 
+INSERT INTO TB_ADMINISTRADORES (ID_Administrador, nome, cpf, endereco, data_nasc, ID_Departamento, ID_Salario) VALUES 
 (1, 'Ana Paula Gomes', '553.124.787-23', 'Rua Apollo, 1010', '1993-01-09', 3, 5);
 
 INSERT INTO TB_SALARIOS (ID_SALARIO, Valor)VALUES 
