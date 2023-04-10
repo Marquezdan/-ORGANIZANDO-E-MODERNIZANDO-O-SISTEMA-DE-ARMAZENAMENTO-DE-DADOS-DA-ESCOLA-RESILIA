@@ -219,10 +219,22 @@ INSERT INTO TB_CONTADORES_SALARIOS (ID_Contador, ID_Salario) VALUES
 (2, 5);
 
 
+-- Perguntas sobre as informações do banco de dados:
+
+-- 1. Selecionar a quantidade total de estudantes cadastrados no banco;
+
+SELECT COUNT(*) FROM TB_ALUNOS;
+
+-- 2. Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
 
 
 
-  
-  
-  
-  
+
+-- 3. Selecionar quais pessoas facilitadoras atuam em mais de uma turma.
+
+SELECT TB_FACILITADORES.Nome_Facilitador
+FROM TB_FACILITADORES H
+INNER JOIN TB_CURSOS ON tb_facilitadores.id_facilitador = tb_cursos.id_facilitador
+GROUP BY tb_facilitadores.id_facilitador
+HAVING COUNT(DISTINCT tb_cursos.id_curso) > 1;
+
