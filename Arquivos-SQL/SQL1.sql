@@ -225,16 +225,56 @@ INSERT INTO TB_CONTADORES_SALARIOS (ID_Contador, ID_Salario) VALUES
 
 SELECT COUNT(*) FROM TB_ALUNOS;
 
--- 2. Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
 
-
+-- 2. Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados (adicionando também os módulos onde estão);
+SELECT TB_ALUNOS.Nome_Aluno, TB_CURSOS.Nome_Curso, TB_MODULOS.Nome_Modulo
+FROM TB_ALUNOS_CURSOS
+JOIN TB_ALUNOS ON TB_ALUNOS_CURSOS.Matricula_Aluno = TB_ALUNOS.Matricula_Aluno
+JOIN TB_CURSOS ON TB_ALUNOS_CURSOS.ID_Curso = TB_CURSOS.ID_Curso
+JOIN TB_CURSOS_MODULOS ON TB_CURSOS.ID_Curso = TB_CURSOS_MODULOS.ID_Curso
+JOIN TB_MODULOS ON TB_CURSOS_MODULOS.ID_Modulo = TB_MODULOS.ID_Modulo;
 
 
 -- 3. Selecionar quais pessoas facilitadoras atuam em mais de uma turma.
+SELECT f.Nome_Facilitador, c.Nome_Curso
+FROM TB_FACILITADORES f
+JOIN TB_MODULOS_FACILITADORES mf ON f.ID_Facilitador = mf.ID_Facilitador
+JOIN TB_MODULOS m ON mf.ID_Modulo = m.ID_Modulo
+JOIN TB_CURSOS_MODULOS cm ON m.ID_Modulo = cm.ID_Modulo
+JOIN TB_CURSOS c ON cm.ID_Curso = c.ID_Curso
+WHERE f.ID_Facilitador IN (
+    SELECT f2.ID_Facilitador
+    FROM TB_FACILITADORES f2
+    JOIN TB_MODULOS_FACILITADORES mf2 ON f2.ID_Facilitador = mf2.ID_Facilitador
+    JOIN TB_MODULOS m2 ON mf2.ID_Modulo = m2.ID_Modulo
+    JOIN TB_CURSOS_MODULOS cm2 ON m2.ID_Modulo = cm2.ID_Modulo
+    GROUP BY f2.ID_Facilitador
+    HAVING COUNT(DISTINCT cm2.ID_Curso) > 1
+)
+ORDER BY f.Nome_Facilitador, c.Nome_Curso;
 
-SELECT TB_FACILITADORES.Nome_Facilitador
-FROM TB_FACILITADORES H
-INNER JOIN TB_CURSOS ON tb_facilitadores.id_facilitador = tb_cursos.id_facilitador
-GROUP BY tb_facilitadores.id_facilitador
-HAVING COUNT(DISTINCT tb_cursos.id_curso) > 1;
+
+-- 4. Selecionar quais alunos possuem mais de 15 anos de idade.
+SELECT Nome_Aluno, Data_Nasc, DATE_PART('year', AGE(CURRENT_DATE, Data_Nasc)) as Idade
+FROM TB_ALUNOS
+WHERE DATE_PART('year', AGE(CURRENT_DATE, Data_Nasc)) > 15;
+
+
+-- 5. Selecionar quais módulos o curso de análise de dados e JAVA possuem.
+SELECT c.Nome_Curso, m.Nome_Modulo
+FROM TB_CURSOS c
+INNER JOIN TB_CURSOS_MODULOS cm ON c.ID_Curso = cm.ID_Curso
+INNER JOIN TB_MODULOS m ON cm.ID_Modulo = m.ID_Modulo
+WHERE c.Nome_Curso IN ('Curso em Análise de dados', 'Curso de Formação JAVA');
+
+
+-- 6. Selecionar qual aluno possue um facilitador como responsável.
+SELECT f.Nome_Facilitador, a.Nome_Aluno
+FROM TB_FACILITADORES f
+INNER JOIN TB_CURSOS c ON c.ID_Curso = c.ID_Curso
+INNER JOIN TB_ALUNOS_CURSOS ac ON c.ID_Curso = ac.ID_Curso
+INNER JOIN TB_ALUNOS a ON ac.Matricula_Aluno = a.Matricula_Aluno
+WHERE a.Nome_Aluno = 'João da Silva';
+
+
 
