@@ -238,14 +238,11 @@ INSERT INTO TB_CONTADORES_SALARIOS (ID_Contador, ID_Salario) VALUES
 SELECT COUNT(*) FROM TB_ALUNOS;
 
 
--- 2. Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados (adicionando também os módulos onde estão);
-SELECT TB_ALUNOS.Nome_Aluno, TB_CURSOS.Nome_Curso, TB_MODULOS.Nome_Modulo
+-- 2. Selecionar todos os estudantes com os respectivos cursos que eles estão cadastrados;
+SELECT TB_ALUNOS.Nome_Aluno, TB_CURSOS.Nome_Curso
 FROM TB_ALUNOS_CURSOS
 JOIN TB_ALUNOS ON TB_ALUNOS_CURSOS.Matricula_Aluno = TB_ALUNOS.Matricula_Aluno
-JOIN TB_CURSOS ON TB_ALUNOS_CURSOS.ID_Curso = TB_CURSOS.ID_Curso
-JOIN TB_CURSOS_MODULOS ON TB_CURSOS.ID_Curso = TB_CURSOS_MODULOS.ID_Curso
-JOIN TB_MODULOS ON TB_CURSOS_MODULOS.ID_Modulo = TB_MODULOS.ID_Modulo;
-
+JOIN TB_CURSOS ON TB_ALUNOS_CURSOS.ID_Curso = TB_CURSOS.ID_Curso;
 
 -- 3. Selecionar quais pessoas facilitadoras atuam em mais de uma turma.
 SELECT f.Nome_Facilitador, c.Nome_Curso
