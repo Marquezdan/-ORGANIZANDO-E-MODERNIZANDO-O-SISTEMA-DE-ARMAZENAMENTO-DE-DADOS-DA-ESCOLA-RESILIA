@@ -268,13 +268,9 @@ INNER JOIN TB_MODULOS m ON cm.ID_Modulo = m.ID_Modulo
 WHERE c.Nome_Curso IN ('Curso em Análise de dados', 'Curso de Formação JAVA');
 
 
--- 6. Selecionar qual aluno possue um facilitador como responsável.
-SELECT f.Nome_Facilitador, a.Nome_Aluno
+-- 6. Selecionar a média dos facilitadores.
+SELECT AVG(s.Valor) AS Media_Salario
 FROM TB_FACILITADORES f
-INNER JOIN TB_CURSOS c ON c.ID_Curso = c.ID_Curso
-INNER JOIN TB_ALUNOS_CURSOS ac ON c.ID_Curso = ac.ID_Curso
-INNER JOIN TB_ALUNOS a ON ac.Matricula_Aluno = a.Matricula_Aluno
-WHERE a.Nome_Aluno = 'João da Silva';
-
+JOIN TB_SALARIOS s ON f.ID_Salario = s.ID_Salario;
 
 
