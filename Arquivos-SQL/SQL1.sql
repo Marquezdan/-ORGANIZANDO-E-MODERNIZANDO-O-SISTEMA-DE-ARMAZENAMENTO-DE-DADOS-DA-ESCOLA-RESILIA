@@ -135,7 +135,7 @@ CREATE TABLE TB_CURSOS_MODULOS
 (19, 'Camila Oliveira', '2022-06-28 09:45:00', 'Patricia Oliveira', '2008-09-06 00:00:00', 'Rua Marechal Deodoro, 863', '988398714', '876.644.351-29'),
 (20, 'Mateus Ferreira Alves', '2022-07-10 16:15:00', 'Amanda Ferreira Alves', '2009-05-19 00:00:00', 'Rua Santo Antônio, 1175', '975453511', '839.022.928-57');
 
- --Faz os inserts na tabela facilitadores.
+--Faz os inserts na tabela facilitadores.
 INSERT INTO TB_FACILITADORES (ID_Facilitador, Materia, Nome_Facilitador, Endereco, Telefone, Horario_de_Trabalho, ID_Salario, ID_Departamento) VALUES
 (1, 'Kanban e Scrum', 'Pedro Gomes', 'Rua 4, 456', '95553159', '8:00-17:00', 1, 1),
 (2, 'Python e SQL', 'Thomas Albuquerque dos Santos', 'Rua Beija-Flor, 46', '975844312', '8:00-17:00', 2, 1),
@@ -166,7 +166,7 @@ INSERT INTO TB_CONTADORES (ID_contador, nome, cpf, endereco, data_nasc, ID_Depar
 (1, 'Carlos Magno', '966.787.231-81', 'Rua Veigas, 19', '1978-03-01', 2, 4),
 (2, 'Jenifer Souza Mello','186.227.454-87', 'Rua Ricardo Soares, 123', '1989-04-12', 2, 4);
 
--- --Faz os inserts na tabela administradores.
+--Faz os inserts na tabela administradores.
 INSERT INTO TB_ADMINISTRADORES (ID_Administrador, nome, cpf, endereco, data_nasc, ID_Departamento, ID_Salario) VALUES 
 (1, 'Ana Paula Gomes', '553.124.787-23', 'Rua Apollo, 1010', '1993-01-09', 3, 5);
 
@@ -214,6 +214,7 @@ INSERT INTO TB_CURSOS_MODULOS (ID_Curso, ID_Modulo) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
+(2, 3),
 (2, 4),
 (2, 5);
 
@@ -277,9 +278,16 @@ INNER JOIN TB_MODULOS m ON cm.ID_Modulo = m.ID_Modulo
 WHERE c.Nome_Curso IN ('Curso em Análise de dados', 'Curso de Formação JAVA');
 
 
--- 6. Selecionar a média dos facilitadores.
+-- 6. Selecionar a média do salário dos facilitadores.
 SELECT AVG(s.Valor) AS Media_Salario
 FROM TB_FACILITADORES f
 JOIN TB_SALARIOS s ON f.ID_Salario = s.ID_Salario;
+
+
+
+
+
+
+
 
 
