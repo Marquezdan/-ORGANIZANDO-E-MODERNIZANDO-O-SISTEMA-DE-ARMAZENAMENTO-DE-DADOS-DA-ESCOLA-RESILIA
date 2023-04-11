@@ -60,7 +60,7 @@ CREATE TABLE TB_CONTADORES
  FOREIGN KEY (ID_Departamento) REFERENCES TB_DEPARTAMENTOS(ID_Departamento),
  FOREIGN KEY (ID_Salario) REFERENCES TB_SALARIOS(ID_Salario)); 
 
- -- Cria a tabela dos Gerentes.
+ -- Cria a tabela dos Administradores.
 Create table TB_ADMINISTRADORES
  (ID_Administrador INT NOT null,
  Nome VARCHAR(30),
@@ -147,7 +147,7 @@ INSERT INTO TB_DEPARTAMENTOS (ID_Departamento, Nome_Dep, Descricao)VALUES
   
 INSERT INTO TB_CURSOS (ID_Curso, Nome_Curso, Descricao_Curso, Total_Horas, horario) VALUES 
 (1, 'Curso em Análise de dados', 'Curso com foco na linguagem Python e metodologias ágeis.', '600 horas', '8:00-12:00'),
-(2,'Cuso de Formação JAVA','Curso com foco em JAVA e desenvolvimento de soft skills.', '700 horas', '13:00-17:00');
+(2,'Curso de Formação JAVA','Curso com foco em JAVA e desenvolvimento de soft skills.', '700 horas', '13:00-17:00');
 
 INSERT INTO TB_MODULOS (ID_Modulo, nome_modulo , descricao) VALUES 
 (1, 'Python ', 'Principais Noções em Python.'),
