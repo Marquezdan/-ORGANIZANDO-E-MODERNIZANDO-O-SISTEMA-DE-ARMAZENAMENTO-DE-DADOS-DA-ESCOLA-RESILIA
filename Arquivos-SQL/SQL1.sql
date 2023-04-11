@@ -71,7 +71,8 @@ Create table TB_ADMINISTRADORES
  ID_Salario INT NOT null, 
  PRIMARY KEY (ID_Administrador),
  FOREIGN KEY (ID_Departamento) REFERENCES TB_DEPARTAMENTOS(ID_Departamento),
- FOREIGN KEY (ID_Salario) REFERENCES TB_SALARIOS(ID_Salario)); 
+ FOREIGN KEY (ID_Salario) REFERENCES TB_SALARIOS(ID_Salario));
+ 
 -- Cria a tabela dos Salários.  
 CREATE TABLE TB_SALARIOS
   (ID_Salario INT NOT null,
@@ -111,7 +112,7 @@ CREATE TABLE TB_CURSOS_MODULOS
  FOREIGN KEY (ID_Contador) REFERENCES TB_Contadores(ID_Contador),
  FOREIGN KEY (ID_Salario ) REFERENCES TB_SALARIOS(ID_Salario));
   
- 
+ --Faz os inserts na tabela alunos.
   INSERT INTO TB_ALUNOS (Matricula_Aluno, Nome_Aluno, Data_Matricula, Nome_Responsavel, Data_Nasc, Endereco_Aluno, Telefone, Cpf_Responsavel) VALUES 
 (1, 'Diego Castro Araujo', '2022-01-10 14:30:00', 'Maria Castro Araujo', '2008-05-10 00:00:00', 'Rua Joazeiro, 1337', '987543310', '772.181.264-05'),
 (2, 'Matias Valente Ramos', '2022-01-12 09:00:00', 'José Vanlente Ramos', '2009-03-12 00:00:00', 'Rua Boa Vista, 1210', '995416238', '254.151.527-84'),
@@ -134,21 +135,25 @@ CREATE TABLE TB_CURSOS_MODULOS
 (19, 'Camila Oliveira', '2022-06-28 09:45:00', 'Patricia Oliveira', '2008-09-06 00:00:00', 'Rua Marechal Deodoro, 863', '988398714', '876.644.351-29'),
 (20, 'Mateus Ferreira Alves', '2022-07-10 16:15:00', 'Amanda Ferreira Alves', '2009-05-19 00:00:00', 'Rua Santo Antônio, 1175', '975453511', '839.022.928-57');
 
+ --Faz os inserts na tabela facilitadores.
 INSERT INTO TB_FACILITADORES (ID_Facilitador, Materia, Nome_Facilitador, Endereco, Telefone, Horario_de_Trabalho, ID_Salario, ID_Departamento) VALUES
 (1, 'Kanban e Scrum', 'Pedro Gomes', 'Rua 4, 456', '95553159', '8:00-17:00', 1, 1),
 (2, 'Python e SQL', 'Thomas Albuquerque dos Santos', 'Rua Beija-Flor, 46', '975844312', '8:00-17:00', 2, 1),
 (3, 'JAVA', 'Agatha Marx da Silva', 'Rua Fresno, 98', '976581292', '8:00-17:00', 3, 1),
 (4, 'Comunicação e Informação', 'Edson Ramos', 'Rua Geremias, 77', '931588829', '8:00-17:00', 1, 1);
 
+ --Faz os inserts na tabela departamentos.
 INSERT INTO TB_DEPARTAMENTOS (ID_Departamento, Nome_Dep, Descricao)VALUES 
 (1, 'Departamento pedagógico e educacional', 'Departamento responsável pelo corpo de doscentes e  do desenvolvimento e planejamento estratégico das ações vinculadas à proposta pedagógica'),
 (2,'Departamento Financeiro','Departamento responável pelo controle de finanças e pagamentos'),
 (3,'Departamento Administrativo','Responsável pelo controle e administração dos outros departamentos, assim como documentação');
   
+ --Faz os inserts na tabela cursos.
 INSERT INTO TB_CURSOS (ID_Curso, Nome_Curso, Descricao_Curso, Total_Horas, horario) VALUES 
 (1, 'Curso em Análise de dados', 'Curso com foco na linguagem Python e metodologias ágeis.', '600 horas', '8:00-12:00'),
 (2,'Curso de Formação JAVA','Curso com foco em JAVA e desenvolvimento de soft skills.', '700 horas', '13:00-17:00');
 
+ --Faz os inserts na tabela módulos.
 INSERT INTO TB_MODULOS (ID_Modulo, nome_modulo , descricao) VALUES 
 (1, 'Python ', 'Principais Noções em Python.'),
 (2,'SQL', 'Criação de bancos e pesquisas utilizando as Querys.'),
@@ -156,19 +161,24 @@ INSERT INTO TB_MODULOS (ID_Modulo, nome_modulo , descricao) VALUES
 (4,'JAVA','Principais Noções em Python.'),
 (5,'Comunicação e informação','Boas práticas na comunicação e tratamento de informações.');
 
+ --Faz os inserts na tabela contadores.
 INSERT INTO TB_CONTADORES (ID_contador, nome, cpf, endereco, data_nasc, ID_Departamento, ID_Salario) VALUES 
 (1, 'Carlos Magno', '966.787.231-81', 'Rua Veigas, 19', '1978-03-01', 2, 4),
 (2, 'Jenifer Souza Mello','186.227.454-87', 'Rua Ricardo Soares, 123', '1989-04-12', 2, 4);
 
+-- --Faz os inserts na tabela administradores.
 INSERT INTO TB_ADMINISTRADORES (ID_Administrador, nome, cpf, endereco, data_nasc, ID_Departamento, ID_Salario) VALUES 
 (1, 'Ana Paula Gomes', '553.124.787-23', 'Rua Apollo, 1010', '1993-01-09', 3, 5);
 
+ --Faz os inserts na tabela salários.
 INSERT INTO TB_SALARIOS (ID_SALARIO, Valor)VALUES 
 (1,2600.00),
 (2,3300.00),
 (3,3600.00),
 (4,3800.00),
 (5,6300.00);
+
+ --Faz a relação entra as tabelas Alunos e Cursos.
 INSERT INTO TB_ALUNOS_CURSOS (Matricula_Aluno, ID_Curso) VALUES 
 (1, 1),
 (2, 2),
@@ -191,6 +201,7 @@ INSERT INTO TB_ALUNOS_CURSOS (Matricula_Aluno, ID_Curso) VALUES
 (19,1),
 (20,1);
 
+--Faz a relação entra as tabelas Facilitadores e Módulos.
 INSERT INTO TB_MODULOS_FACILITADORES (ID_Facilitador, ID_Modulo)VALUES 
 (1, 3),
 (2, 1),
@@ -198,7 +209,7 @@ INSERT INTO TB_MODULOS_FACILITADORES (ID_Facilitador, ID_Modulo)VALUES
 (3, 4),
 (4, 5);
 
- 
+ --Faz a relação entra as tabelas Cursos e Módulos.
 INSERT INTO TB_CURSOS_MODULOS (ID_Curso, ID_Modulo) VALUES 
 (1, 1),
 (1, 2),
@@ -206,6 +217,7 @@ INSERT INTO TB_CURSOS_MODULOS (ID_Curso, ID_Modulo) VALUES
 (2, 4),
 (2, 5);
 
+--Faz a relação entra as tabelas Contador e Salario.
 INSERT INTO TB_CONTADORES_SALARIOS (ID_Contador, ID_Salario) VALUES 
 (1, 1), 
 (1, 2),  
